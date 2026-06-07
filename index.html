@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Fitness Lane — Indore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+/* ── VARIABLES ── */
+:root {
+  --primary: #e63118;
+  --primary-dark: #c0260f;
+  --black: #0f0f0f;
+  --white: #ffffff;
+  --gray: #6b7280;
+  --gray-light: #f3f4f6;
+  --gray-mid: #e5e7eb;
+  --font-heading: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+  --radius: 4px;
+  --transition: all 0.3s ease;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--black); background: var(--white); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ── UTILITIES ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+.btn-primary {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  transition: var(--transition);
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+.btn-primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); transform: translateY(-2px); }
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--black);
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 2px solid var(--black);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-outline:hover { background: var(--black); color: #fff; transform: translateY(-2px); }
+
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+.section-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+.section-header h2 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  letter-spacing: 3px;
+  color: var(--black);
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+.section-header h2 span { color: var(--primary); }
+.section-header p { font-size: 0.95rem; color: var(--gray); max-width: 540px; margin: 0 auto; line-height: 1.7; }
+
+/* ── AOS ANIMATIONS ── */
+[data-aos] { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+[data-aos].visible { opacity: 1; transform: translateY(0); }
+
+/* ── NAVBAR ── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--gray-mid);
+  transition: var(--transition);
+}
+.navbar.scrolled { box-shadow: var(--shadow); }
+.nav-inner { display: flex; align-items: center; gap: 2rem; padding: 1rem 1.5rem; }
+.nav-logo {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  color: var(--black);
+  flex-shrink: 0;
+}
+.nav-logo strong { color: var(--primary); }
+.nav-links { display: flex; gap: 1.8rem; flex: 1; }
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gray);
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 2px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.nav-links a:hover { color: var(--black); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta { font-size: 0.78rem; padding: 0.6rem 1.2rem; flex-shrink: 0; }
+.hamburger { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--black); }
+.mobile-menu { display: none; background: #fff; border-top: 1px solid var(--gray-mid); padding: 1.5rem; }
+.mobile-menu.open { display: block; }
+.mobile-menu ul { display: flex; flex-direction: column; gap: 1rem; }
+.mobile-menu a { font-size: 0.9rem; font-weight: 500; color: var(--black); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  top: 0; right: 0;
+  width: 55%;
+  height: 100%;
+  background: var(--gray-light);
+  clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding: 4rem 1.5rem;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(230,49,24,0.08);
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: 5.5rem;
+  letter-spacing: 4px;
+  line-height: 0.95;
+  color: var(--black);
+  margin-bottom: 1.5rem;
+}
+.hero-content h1 span { color: var(--primary); }
+.hero-content p { font-size: 1rem; color: var(--gray); line-height: 1.75; margin-bottom: 1.25rem; max-width: 440px; }
+.hero-info { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.hero-info span { font-size: 0.8rem; color: var(--gray); display: flex; align-items: center; gap: 0.4rem; }
+.hero-info i { color: var(--primary); }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.hero-stats { display: flex; align-items: center; gap: 1.5rem; }
+.hero-stat strong { display: block; font-family: var(--font-heading); font-size: 2.2rem; color: var(--primary); letter-spacing: 2px; line-height: 1; }
+.hero-stat span { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
+.hero-stat-div { width: 1px; height: 40px; background: var(--gray-mid); }
+.hero-img-wrap { position: relative; }
+.hero-img-card { position: relative; }
+.hero-img { width: 100%; height: 550px; object-fit: cover; clip-path: polygon(0 0, 94% 0, 100% 4%, 100% 100%, 6% 100%, 0 96%); }
+.hero-img-badge {
+  position: absolute;
+  bottom: 2rem; left: -1.5rem;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── ABOUT ── */
+.about { padding: 7rem 0; background: #fff; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
+.about-img-col { position: relative; }
+.about-img-main { width: 100%; height: 500px; object-fit: cover; clip-path: polygon(0 0, 94% 0, 100% 4%, 100% 100%, 6% 100%, 0 96%); }
+.about-badge {
+  position: absolute;
+  top: 2rem; left: -2rem;
+  background: var(--primary);
+  color: #fff;
+  padding: 1rem 1.25rem;
+  text-align: center;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+.about-badge span { font-family: var(--font-heading); font-size: 2.2rem; letter-spacing: 2px; display: block; line-height: 1; }
+.about-badge small { font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.85; }
+.about-content { display: flex; flex-direction: column; gap: 1.25rem; }
+.about-desc { font-size: 0.95rem; color: var(--gray); line-height: 1.85; }
+.about-desc strong { color: var(--black); }
+.about-features { display: flex; flex-direction: column; gap: 0.6rem; }
+.about-features li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; color: var(--gray); }
+.about-features i { color: var(--primary); flex-shrink: 0; }
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--gray-mid); border: 1px solid var(--gray-mid); }
+.stat-card { background: #fff; padding: 2.5rem 1.5rem; text-align: center; transition: var(--transition); }
+.stat-card:hover { background: var(--gray-light); }
+.stat-num { font-family: var(--font-heading); font-size: 3.5rem; letter-spacing: 2px; color: var(--primary); line-height: 1; }
+.stat-label { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-top: 0.5rem; }
+
+/* ── CLASSES ── */
+.classes { padding: 7rem 0; background: var(--gray-light); }
+.classes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.class-card {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--gray-mid);
+  transition: var(--transition);
+  position: relative;
+  border-top: 3px solid transparent;
+}
+.class-card:hover { border-top-color: var(--primary); box-shadow: var(--shadow); transform: translateY(-4px); }
+.class-card.featured { border-top-color: var(--primary); box-shadow: var(--shadow); }
+.class-icon { width: 56px; height: 56px; background: rgba(230,49,24,0.08); color: var(--primary); font-size: 1.4rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+.class-card h3 { font-family: var(--font-heading); font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 0.6rem; }
+.class-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.65; margin-bottom: 1rem; }
+.class-time { font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 0.4rem; }
+.class-time i { color: var(--primary); }
+
+/* ── TRAINERS ── */
+.trainers { padding: 7rem 0; background: #fff; }
+.trainers-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+.trainer-card {
+  background: var(--gray-light);
+  border: 1px solid var(--gray-mid);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+}
+.trainer-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+.trainer-card.featured { background: #fff; box-shadow: var(--shadow); border-color: var(--primary); }
+.trainer-avatar {
+  width: 72px; height: 72px;
+  background: var(--primary);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem;
+}
+.trainer-exp {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.6rem;
+}
+.trainer-card h3 { font-family: var(--font-heading); font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 0.25rem; }
+.trainer-role { font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 0.5rem; }
+.trainer-card p { font-size: 0.78rem; color: var(--gray); margin-bottom: 0.75rem; }
+.trainer-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin-bottom: 0.75rem; }
+.trainer-tags span { background: rgba(230,49,24,0.08); color: var(--primary); font-size: 0.62rem; font-weight: 600; padding: 0.2rem 0.6rem; letter-spacing: 0.5px; }
+.trainer-rating { font-size: 0.8rem; font-weight: 700; color: #f59e0b; }
+.trainer-rating i { margin-right: 0.2rem; }
+
+/* ── PRICING ── */
+.pricing { padding: 7rem 0; background: var(--gray-light); }
+.pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
+.pricing-card {
+  background: #fff;
+  border: 1px solid var(--gray-mid);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+}
+.pricing-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); }
+.pricing-card.popular {
+  background: var(--black);
+  color: #fff;
+  border-color: var(--black);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+.popular-badge {
+  position: absolute;
+  top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.3rem 1rem;
+  white-space: nowrap;
+}
+.plan-name { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 0.75rem; font-weight: 600; }
+.popular .plan-name { color: rgba(255,255,255,0.5); }
+.plan-price { font-family: var(--font-heading); font-size: 3rem; letter-spacing: 2px; color: var(--primary); margin-bottom: 1.5rem; line-height: 1; }
+.plan-price span { font-size: 1rem; letter-spacing: 1px; color: var(--gray); font-family: var(--font-body); font-weight: 400; }
+.popular .plan-price span { color: rgba(255,255,255,0.4); }
+.plan-features { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; text-align: left; }
+.plan-features li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; }
+.plan-features li.yes { color: var(--black); }
+.plan-features li.no { color: var(--gray); opacity: 0.5; }
+.popular .plan-features li.yes { color: #fff; }
+.popular .plan-features li.no { color: rgba(255,255,255,0.3); }
+.plan-features .fa-check { color: var(--primary); }
+.plan-features .fa-times { color: var(--gray); }
+.popular .btn-primary { background: var(--primary); }
+.pricing-card .btn-outline { width: 100%; text-align: center; }
+
+/* Offers */
+.offers-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.offer-card {
+  background: #fff;
+  border: 1px solid var(--gray-mid);
+  border-left: 4px solid var(--primary);
+  padding: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: var(--transition);
+}
+.offer-card:hover { box-shadow: var(--shadow); }
+.offer-card.bday { border-left-color: #d4af37; }
+.offer-icon { width: 50px; height: 50px; background: rgba(230,49,24,0.08); color: var(--primary); font-size: 1.3rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.offer-card.bday .offer-icon { background: rgba(212,175,55,0.1); color: #d4af37; }
+.offer-badge { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 0.3rem; }
+.offer-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+.offer-card p { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+.offer-card p strong { color: var(--black); }
+.offer-disc { margin-left: auto; font-family: var(--font-heading); font-size: 1.8rem; color: var(--primary); text-align: center; line-height: 1; flex-shrink: 0; }
+.offer-card.bday .offer-disc { color: #d4af37; }
+.offer-disc small { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 2px; color: var(--gray); display: block; }
+
+/* ── BMI ── */
+.bmi-section { padding: 7rem 0; background: #fff; }
+.bmi-card { background: var(--gray-light); border: 1px solid var(--gray-mid); padding: 2.5rem; margin-bottom: 2rem; }
+.bmi-inputs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+.bmi-field { display: flex; flex-direction: column; gap: 0.5rem; }
+.bmi-field label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); font-weight: 600; }
+.bmi-field input { padding: 0.8rem 1rem; border: 1.5px solid var(--gray-mid); background: #fff; font-family: var(--font-body); font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+.bmi-field input:focus { border-color: var(--primary); }
+.bmi-btn { width: 100%; font-size: 0.9rem; padding: 1rem; }
+.bmi-result { }
+.bmi-score-row { display: grid; grid-template-columns: 200px 1fr; gap: 1.5rem; margin-bottom: 2rem; align-items: center; }
+.bmi-score-card { background: var(--gray-light); border: 1px solid var(--gray-mid); padding: 2rem; text-align: center; }
+.bmi-num { font-family: var(--font-heading); font-size: 4rem; color: var(--primary); line-height: 1; }
+.bmi-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin: 0.3rem 0 0.75rem; }
+.bmi-cat { display: inline-block; background: var(--primary); color: #fff; padding: 0.3rem 1rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+.bmi-gauge-card { background: var(--gray-light); border: 1px solid var(--gray-mid); padding: 2rem; }
+.gauge-bar { position: relative; display: flex; height: 16px; margin-bottom: 0.5rem; }
+.gauge-seg { flex: 1; }
+.gauge-seg.blue { background: #3b82f6; }
+.gauge-seg.green { background: #22c55e; }
+.gauge-seg.orange { background: #f97316; }
+.gauge-seg.red { background: #ef4444; }
+.gauge-needle { position: absolute; top: -5px; width: 3px; height: 26px; background: var(--black); transform: translateX(-50%); transition: left 0.8s cubic-bezier(0.34,1.56,0.64,1); border-radius: 2px; }
+.gauge-labels { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--gray); }
+.gauge-cats { display: flex; justify-content: space-around; font-size: 0.65rem; margin-top: 0.4rem; font-weight: 600; }
+.diet-chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.diet-chart-header h3 { font-family: var(--font-heading); font-size: 1.4rem; letter-spacing: 1px; }
+.btn-download { background: transparent; border: 2px solid var(--primary); color: var(--primary); padding: 0.6rem 1.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: var(--transition); }
+.btn-download:hover { background: var(--primary); color: #fff; }
+.diet-chart { background: #fff; border: 1px solid var(--gray-mid); padding: 2.5rem; }
+.dc-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--gray-mid); padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
+.dc-gym { font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 0.3rem; }
+.dc-title { font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 3px; }
+.dc-meta { text-align: right; font-size: 0.8rem; color: var(--gray); line-height: 1.8; }
+.dc-goal { font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); margin-bottom: 1.25rem; }
+.dc-meal-row { display: grid; grid-template-columns: 200px 1fr; border: 1px solid var(--gray-mid); border-bottom: none; }
+.dc-meal-row:last-of-type { border-bottom: 1px solid var(--gray-mid); }
+.dc-meal-time { padding: 0.9rem 1rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; border-right: 3px solid var(--primary); background: var(--gray-light); display: flex; align-items: center; }
+.dc-meal-items { padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.dc-meal-items span { font-size: 0.82rem; color: var(--gray); }
+.dc-tips { background: var(--gray-light); border: 1px solid var(--gray-mid); padding: 1.25rem; margin: 1.25rem 0; }
+.dc-tips h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; color: var(--primary); }
+.dc-tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 2rem; }
+.dc-tip { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--gray); }
+.dc-tip::before { content: '•'; color: var(--primary); font-weight: 700; }
+.dc-contact { font-size: 0.75rem; color: var(--gray); text-align: center; padding: 0.75rem; border-top: 1px solid var(--gray-mid); }
+.dc-footer { font-size: 0.68rem; color: #aaa; text-align: center; font-style: italic; padding-top: 0.5rem; }
+
+/* ── CONTACT ── */
+.contact { padding: 7rem 0; background: var(--gray-light); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3rem; }
+.contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+.info-item { display: flex; gap: 1rem; align-items: flex-start; }
+.info-item i { width: 42px; height: 42px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.95rem; }
+.info-item strong { display: block; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 0.25rem; }
+.info-item p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+.contact-socials { display: flex; gap: 0.75rem; }
+.contact-socials a { width: 40px; height: 40px; background: #fff; border: 1.5px solid var(--gray-mid); color: var(--gray); display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: var(--transition); }
+.contact-socials a:hover { background: var(--primary); border-color: var(--primary); color: #fff; transform: translateY(-3px); }
+.contact-form { background: #fff; border: 1px solid var(--gray-mid); padding: 2.5rem; }
+.contact-form h3 { font-family: var(--font-heading); font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--gray-mid); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+.form-group label { font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--gray-mid);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.2s;
+  resize: none;
+  width: 100%;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+.submit-btn { width: 100%; padding: 1rem; font-size: 0.9rem; }
+
+/* ── FOOTER ── */
+.footer { background: var(--black); color: rgba(255,255,255,0.7); padding: 4rem 0 0; }
+.footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 3rem; padding-bottom: 3rem; }
+.footer-logo { font-family: var(--font-heading); font-size: 1.4rem; letter-spacing: 3px; color: #fff; margin-bottom: 1rem; }
+.footer-logo strong { color: var(--primary); }
+.footer-brand p { font-size: 0.82rem; line-height: 1.8; color: rgba(255,255,255,0.45); max-width: 260px; }
+.footer-col h4 { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(230,49,24,0.3); }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col a { font-size: 0.82rem; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+.footer-col a:hover { color: var(--primary); }
+.footer-contact li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.82rem; color: rgba(255,255,255,0.45); margin-bottom: 0.6rem; line-height: 1.5; }
+.footer-contact i { color: var(--primary); flex-shrink: 0; margin-top: 0.15rem; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 0; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  width: 56px; height: 56px;
+  background: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  z-index: 999;
+  transition: var(--transition);
+}
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .trainers-grid { grid-template-columns: repeat(2,1fr); }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-bg { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .classes-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto 2.5rem; }
+  .pricing-card.popular { transform: none; }
+  .offers-row { grid-template-columns: 1fr; }
+  .bmi-inputs { grid-template-columns: 1fr; }
+  .bmi-score-row { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: block; }
+  .section-header h2 { font-size: 2.2rem; }
+  .hero-content h1 { font-size: 3.5rem; }
+}
+
+@media (max-width: 600px) {
+  .classes-grid { grid-template-columns: 1fr; }
+  .trainers-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .dc-meal-row { grid-template-columns: 1fr; }
+  .dc-meal-time { border-right: none; border-bottom: 3px solid var(--primary); }
+  .dc-tips-grid { grid-template-columns: 1fr; }
+}
+
+/* ── PRINT / PDF ── */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  .navbar, .wa-float, .hamburger, .mobile-menu,
+  .bmi-section, .contact-form, .btn-download, .bmi-btn { display: none !important; }
+
+  body { font-size: 11pt; }
+
+  .hero { min-height: auto; padding: 3rem 0; page-break-after: always; }
+  .hero-bg { display: block; }
+  .about { page-break-after: always; }
+  .classes { page-break-after: always; }
+  .trainers { page-break-after: always; }
+  .pricing { page-break-after: always; }
+  .contact { page-break-after: avoid; }
+
+  .section-header h2 { font-size: 2.2rem; }
+  .hero-content h1 { font-size: 3.5rem; }
+
+  .classes-grid { grid-template-columns: repeat(3,1fr); }
+  .trainers-grid { grid-template-columns: repeat(4,1fr); }
+  .pricing-grid { grid-template-columns: repeat(3,1fr); max-width: 100%; }
+  .pricing-card.popular { transform: none; }
+  .stats-row { grid-template-columns: repeat(4,1fr); }
+
+  .footer { background: #0f0f0f !important; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="nav-logo">
+        THE <strong>FITNESS</strong> LANE
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#trainers">Trainers</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#bmi">Diet Planner</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn-primary nav-cta">Join Now</a>
+      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#home" onclick="closeMobile()">Home</a></li>
+        <li><a href="#about" onclick="closeMobile()">About</a></li>
+        <li><a href="#classes" onclick="closeMobile()">Classes</a></li>
+        <li><a href="#trainers" onclick="closeMobile()">Trainers</a></li>
+        <li><a href="#pricing" onclick="closeMobile()">Pricing</a></li>
+        <li><a href="#bmi" onclick="closeMobile()">Diet Planner</a></li>
+        <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
+        <li><a href="#contact" class="btn-primary" onclick="closeMobile()">Join Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-inner">
+      <div class="hero-content" data-aos>
+        <span class="hero-tag"><i class="fas fa-fire"></i> Indore's Premium Gym</span>
+        <h1>TRAIN HARD.<br /><span>LIVE STRONG.</span></h1>
+        <p>Where champions are built. World-class equipment, expert trainers and a community that pushes you beyond limits.</p>
+        <div class="hero-info">
+          <span><i class="fas fa-clock"></i> Mon–Sat: 5 AM – 11 PM</span>
+          <span><i class="fas fa-map-marker-alt"></i> Indore, M.P.</span>
+        </div>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">Start Free Trial</a>
+          <a href="#pricing" class="btn-outline">View Plans</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>800+</strong><span>Members</span></div>
+          <div class="hero-stat-div"></div>
+          <div class="hero-stat"><strong>15+</strong><span>Trainers</span></div>
+          <div class="hero-stat-div"></div>
+          <div class="hero-stat"><strong>4.9</strong><span>Rating</span></div>
+        </div>
+      </div>
+      <div class="hero-img-wrap" data-aos>
+        <div class="hero-img-card">
+          <div class="hero-img-badge"><i class="fas fa-dumbbell"></i> Premium Equipment</div>
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Gym" class="hero-img"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Who We Are</span>
+        <h2>MORE THAN A <span>GYM</span>, A LIFESTYLE</h2>
+        <p>Founded in Indore, The Fitness Lane was born from a simple belief — that every person deserves access to world-class fitness.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-img-col" data-aos>
+          <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80" alt="Gym Interior" class="about-img-main"/>
+          <div class="about-badge"><span>10+</span><small>Years of<br/>Excellence</small></div>
+        </div>
+        <div class="about-content" data-aos>
+          <p class="about-desc">We combine <strong>premium equipment</strong>, expert coaching, and a motivating community to help you unlock your true potential.</p>
+          <p class="about-desc">Whether you're a beginner or a seasoned athlete, we have the resources and passion to guide you every step of the way.</p>
+          <ul class="about-features">
+            <li><i class="fas fa-check-circle"></i> State-of-the-art equipment updated regularly</li>
+            <li><i class="fas fa-check-circle"></i> Certified & experienced personal trainers</li>
+            <li><i class="fas fa-check-circle"></i> Dedicated zones: Free weights, Cardio, Functional</li>
+            <li><i class="fas fa-check-circle"></i> Locker rooms & premium amenities</li>
+            <li><i class="fas fa-check-circle"></i> Flexible membership plans for all budgets</li>
+            <li><i class="fas fa-check-circle"></i> Nutrition & diet consultation available</li>
+          </ul>
+          <a href="#contact" class="btn-primary">Get Started Today</a>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" data-target="800">0</div><div class="stat-label">Active Members</div></div>
+        <div class="stat-card"><div class="stat-num" data-target="15">0</div><div class="stat-label">Expert Trainers</div></div>
+        <div class="stat-card"><div class="stat-num" data-target="40">0</div><div class="stat-label">Weekly Classes</div></div>
+        <div class="stat-card"><div class="stat-num" data-target="10">0</div><div class="stat-label">Years Strong</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASSES -->
+  <section id="classes" class="classes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What We Offer</span>
+        <h2>OUR <span>CLASSES</span></h2>
+        <p>From strength training to yoga — we have a class for every fitness goal.</p>
+      </div>
+      <div class="classes-grid">
+        <div class="class-card" data-aos>
+          <div class="class-icon"><i class="fas fa-dumbbell"></i></div>
+          <h3>Weight Training</h3>
+          <p>Build strength and muscle with guided free weight and machine programs.</p>
+          <span class="class-time"><i class="fas fa-clock"></i> 60 min</span>
+        </div>
+        <div class="class-card" data-aos>
+          <div class="class-icon"><i class="fas fa-heartbeat"></i></div>
+          <h3>Cardio Blast</h3>
+          <p>High-energy cardio sessions to burn fat and boost your stamina.</p>
+          <span class="class-time"><i class="fas fa-clock"></i> 45 min</span>
+        </div>
+        <div class="class-card featured" data-aos>
+          <div class="class-icon"><i class="fas fa-fire"></i></div>
+          <h3>CrossFit</h3>
+          <p>Functional movements and high-intensity workouts for total fitness.</p>
+          <span class="class-time"><i class="fas fa-clock"></i> 60 min</span>
+        </div>
+        <div class="class-card" data-aos>
+          <div class="class-icon"><i class="fas fa-spa"></i></div>
+          <h3>Yoga & Flexibility</h3>
+          <p>Balance mind and body with guided yoga and stretching routines.</p>
+          <span class="class-time"><i class="fas fa-clock"></i> 50 min</span>
+        </div>
+        <div class="class-card" data-aos>
+          <div class="class-icon"><i class="fas fa-music"></i></div>
+          <h3>Zumba Dance</h3>
+          <p>Fun, high-energy dance fitness class for all fitness levels.</p>
+          <span class="class-time"><i class="fas fa-clock"></i> 45 min</span>
+        </div>
+        <div class="class-card" data-aos>
+          <div class="class-icon"><i class="fas fa-fist-raised"></i></div>
+          <h3>MMA & Boxing</h3>
+          <p>Self-defence, boxing and mixed martial arts training for all.</p>
+          <span class="class-time"><i class="fas fa-clock"></i> 60 min</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINERS -->
+  <section id="trainers" class="trainers">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Meet The Team</span>
+        <h2>EXPERT <span>TRAINERS</span></h2>
+        <p>Certified professionals committed to your fitness journey.</p>
+      </div>
+      <div class="trainers-grid">
+        <div class="trainer-card" data-aos>
+          <div class="trainer-avatar">AK</div>
+          <div class="trainer-exp">8 Yrs</div>
+          <h3>Arjun Kapoor</h3>
+          <span class="trainer-role">Head Trainer & CrossFit Coach</span>
+          <p>CrossFit · Strength & Conditioning</p>
+          <div class="trainer-tags"><span>NSCA-CSCS</span><span>CrossFit L2</span></div>
+          <div class="trainer-rating"><i class="fas fa-star"></i> 4.9</div>
+        </div>
+        <div class="trainer-card" data-aos>
+          <div class="trainer-avatar">RS</div>
+          <div class="trainer-exp">10 Yrs</div>
+          <h3>Rahul Sharma</h3>
+          <span class="trainer-role">MMA & Boxing Coach</span>
+          <p>Boxing · MMA · Self-Defence</p>
+          <div class="trainer-tags"><span>MMA Certified</span><span>Boxing Pro</span></div>
+          <div class="trainer-rating"><i class="fas fa-star"></i> 4.8</div>
+        </div>
+        <div class="trainer-card featured" data-aos>
+          <div class="trainer-avatar">PV</div>
+          <div class="trainer-exp">6 Yrs</div>
+          <h3>Pankaj Verma</h3>
+          <span class="trainer-role">Yoga & Wellness Expert</span>
+          <p>Yoga · Pilates · Flexibility</p>
+          <div class="trainer-tags"><span>RYT-500</span><span>Pilates Certified</span></div>
+          <div class="trainer-rating"><i class="fas fa-star"></i> 5.0</div>
+        </div>
+        <div class="trainer-card" data-aos>
+          <div class="trainer-avatar">SM</div>
+          <div class="trainer-exp">5 Yrs</div>
+          <h3>Sanjay Malhotra</h3>
+          <span class="trainer-role">Nutrition & Fitness Coach</span>
+          <p>Diet Planning · HIIT · Zumba</p>
+          <div class="trainer-tags"><span>ACE-CPT</span><span>Nutritionist</span></div>
+          <div class="trainer-rating"><i class="fas fa-star"></i> 4.9</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Membership Plans</span>
+        <h2>CHOOSE YOUR <span>PLAN</span></h2>
+        <p>No hidden fees. Flexible plans. Cancel anytime.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card" data-aos>
+          <div class="plan-name">Basic</div>
+          <div class="plan-price">₹999<span>/month</span></div>
+          <ul class="plan-features">
+            <li class="yes"><i class="fas fa-check"></i> Gym Access (6 AM–10 PM)</li>
+            <li class="yes"><i class="fas fa-check"></i> Locker Room</li>
+            <li class="yes"><i class="fas fa-check"></i> Free Weight Zone</li>
+            <li class="yes"><i class="fas fa-check"></i> Cardio Equipment</li>
+            <li class="no"><i class="fas fa-times"></i> Group Classes</li>
+            <li class="no"><i class="fas fa-times"></i> Personal Trainer</li>
+          </ul>
+          <a href="#contact" class="btn-outline">Get Started</a>
+        </div>
+        <div class="pricing-card popular" data-aos>
+          <div class="popular-badge">Most Popular</div>
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">₹1,799<span>/month</span></div>
+          <ul class="plan-features">
+            <li class="yes"><i class="fas fa-check"></i> Gym Access (5 AM–11 PM)</li>
+            <li class="yes"><i class="fas fa-check"></i> Locker Room</li>
+            <li class="yes"><i class="fas fa-check"></i> Free Weight Zone</li>
+            <li class="yes"><i class="fas fa-check"></i> Cardio Equipment</li>
+            <li class="yes"><i class="fas fa-check"></i> All Group Classes</li>
+            <li class="yes"><i class="fas fa-check"></i> 2 PT Sessions/Month</li>
+          </ul>
+          <a href="#contact" class="btn-primary">Get Started</a>
+        </div>
+        <div class="pricing-card" data-aos>
+          <div class="plan-name">Elite</div>
+          <div class="plan-price">₹2,999<span>/month</span></div>
+          <ul class="plan-features">
+            <li class="yes"><i class="fas fa-check"></i> 24/7 Gym Access</li>
+            <li class="yes"><i class="fas fa-check"></i> Locker Room</li>
+            <li class="yes"><i class="fas fa-check"></i> Free Weight Zone</li>
+            <li class="yes"><i class="fas fa-check"></i> Cardio Equipment</li>
+            <li class="yes"><i class="fas fa-check"></i> All Group Classes</li>
+            <li class="yes"><i class="fas fa-check"></i> Unlimited PT Sessions</li>
+          </ul>
+          <a href="#contact" class="btn-outline">Get Started</a>
+        </div>
+      </div>
+
+      <!-- Offers -->
+      <div class="offers-row">
+        <div class="offer-card" data-aos>
+          <div class="offer-icon"><i class="fas fa-clock"></i></div>
+          <div>
+            <div class="offer-badge">Daily 2 PM – 5 PM</div>
+            <h3>Happy Hours 🎉</h3>
+            <p>Ladies get flat <strong>20% OFF</strong> on Annual Membership during Happy Hours!</p>
+          </div>
+          <div class="offer-disc">20%<br/><small>OFF</small></div>
+        </div>
+        <div class="offer-card bday" data-aos>
+          <div class="offer-icon"><i class="fas fa-birthday-cake"></i></div>
+          <div>
+            <div class="offer-badge">On Your Special Day</div>
+            <h3>Birthday Discount 🎂</h3>
+            <p>Join on your birthday and get <strong>₹500 OFF</strong> on Annual Membership!</p>
+          </div>
+          <div class="offer-disc">₹500<br/><small>OFF</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BMI CALCULATOR -->
+  <section id="bmi" class="bmi-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Health Tool</span>
+        <h2>BMI <span>CALCULATOR</span></h2>
+        <p>Enter your details to get your BMI score and a personalised diet chart.</p>
+      </div>
+      <div class="bmi-card">
+        <div class="bmi-inputs">
+          <div class="bmi-field">
+            <label>Your Name</label>
+            <input type="text" id="bmiName" placeholder="e.g. Rahul Sharma"/>
+          </div>
+          <div class="bmi-field">
+            <label>Height (cm)</label>
+            <input type="number" id="bmiHeight" placeholder="e.g. 175"/>
+          </div>
+          <div class="bmi-field">
+            <label>Weight (kg)</label>
+            <input type="number" id="bmiWeight" placeholder="e.g. 72"/>
+          </div>
+        </div>
+        <button class="btn-primary bmi-btn" onclick="calculateBMI()">Calculate BMI & Get Diet Chart</button>
+      </div>
+
+      <div class="bmi-result" id="bmiResult" style="display:none">
+        <div class="bmi-score-row">
+          <div class="bmi-score-card">
+            <div class="bmi-num" id="bmiNum">--</div>
+            <div class="bmi-label">Your BMI</div>
+            <div class="bmi-cat" id="bmiCat">--</div>
+          </div>
+          <div class="bmi-gauge-card">
+            <div class="gauge-bar">
+              <div class="gauge-seg blue"></div>
+              <div class="gauge-seg green"></div>
+              <div class="gauge-seg orange"></div>
+              <div class="gauge-seg red"></div>
+              <div class="gauge-needle" id="gaugeNeedle"></div>
+            </div>
+            <div class="gauge-labels"><span>10</span><span>18.5</span><span>25</span><span>30</span><span>40</span></div>
+            <div class="gauge-cats">
+              <span style="color:#3b82f6">Underweight</span>
+              <span style="color:#22c55e">Normal</span>
+              <span style="color:#f97316">Overweight</span>
+              <span style="color:#ef4444">Obese</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="diet-chart-header">
+          <h3>Your Personalised Diet Chart</h3>
+          <button class="btn-download" onclick="downloadChart()">⬇ Download PDF</button>
+        </div>
+
+        <div class="diet-chart" id="dietChart">
+          <div class="dc-header">
+            <div>
+              <div class="dc-gym">THE FITNESS LANE · INDORE</div>
+              <div class="dc-title">PERSONALISED DIET CHART</div>
+            </div>
+            <div class="dc-meta" id="dcMeta"></div>
+          </div>
+          <div class="dc-goal" id="dcGoal"></div>
+          <div id="dcMeals"></div>
+          <div class="dc-tips" id="dcTips"></div>
+          <div class="dc-contact">
+            📍 Indore, M.P. &nbsp;|&nbsp; 📞 +91 XXXXX XXXXX &nbsp;|&nbsp; ✉ thefitnesslan e@gmail.com
+          </div>
+          <div class="dc-footer">This is a general guideline. Consult a certified nutritionist for a personalised plan.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Get In Touch</span>
+        <h2>CONTACT <span>US</span></h2>
+        <p>Ready to start your fitness journey? Walk in, call us, or fill out the form.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong>Address</strong><p>Indore, Madhya Pradesh</p></div></div>
+          <div class="info-item"><i class="fas fa-phone"></i><div><strong>Phone</strong><p>+91 XXXXX XXXXX</p></div></div>
+          <div class="info-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><p>thefitnesslan e@gmail.com</p></div></div>
+          <div class="info-item"><i class="fas fa-clock"></i><div><strong>Hours</strong><p>Mon–Sat: 5 AM – 11 PM<br/>Sun: 8 AM – 1 PM</p></div></div>
+          <div class="contact-socials">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <form class="contact-form" onsubmit="sendWA(event)">
+          <h3>Book a Free Trial Session</h3>
+          <div class="form-row">
+            <div class="form-group"><label>Full Name *</label><input type="text" id="cfName" required placeholder="Your name"/></div>
+            <div class="form-group"><label>Phone *</label><input type="tel" id="cfPhone" required placeholder="+91 XXXXX XXXXX"/></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" id="cfEmail" placeholder="your@email.com"/></div>
+          <div class="form-group">
+            <label>Interested In</label>
+            <select id="cfPlan">
+              <option value="">Select a plan or class</option>
+              <option>Basic Membership</option>
+              <option>Premium Membership</option>
+              <option>Elite Membership</option>
+              <option>Personal Training</option>
+              <option>Group Classes</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message</label><textarea id="cfMsg" rows="4" placeholder="Tell us your fitness goal..."></textarea></div>
+          <button type="submit" class="btn-primary submit-btn">Send Message via WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">THE <strong>FITNESS</strong> LANE</div>
+        <p>Indore's premium fitness destination. Your journey to a stronger, healthier you starts here.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#classes">Classes</a></li>
+          <li><a href="#trainers">Trainers</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Classes</h4>
+        <ul>
+          <li><a href="#">Weight Training</a></li>
+          <li><a href="#">Cardio Blast</a></li>
+          <li><a href="#">CrossFit</a></li>
+          <li><a href="#">Yoga & Flexibility</a></li>
+          <li><a href="#">Zumba Dance</a></li>
+          <li><a href="#">MMA & Boxing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-map-marker-alt"></i> Indore, Madhya Pradesh</li>
+          <li><i class="fas fa-phone"></i> +91 XXXXX XXXXX</li>
+          <li><i class="fas fa-envelope"></i> thefitnesslan e@gmail.com</li>
+          <li><i class="fas fa-clock"></i> Mon–Sat: 5 AM – 11 PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 The Fitness Lane, Indore. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/91XXXXXXXXXX" class="wa-float" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+// Navbar scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Hamburger
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+
+// AOS
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { margin: '-80px' });
+document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+
+// Counter
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.target);
+    let start = 0;
+    const step = Math.ceil(target / 80);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { el.textContent = target + '+'; clearInterval(timer); }
+      else el.textContent = start + '+';
+    }, 20);
+    counterObs.unobserve(el);
+  });
+}, { margin: '-60px' });
+document.querySelectorAll('.stat-num[data-target]').forEach(el => counterObs.observe(el));
+
+// Diet Plans
+const dietPlans = {
+  underweight: {
+    label: 'Underweight', color: '#3b82f6',
+    goal: 'Gain healthy weight & build muscle mass',
+    calories: '2800 – 3200 kcal/day',
+    meals: [
+      { time: 'Breakfast (7–8 AM)', items: ['Oats with full-fat milk & banana', '3 whole eggs (boiled/omelette)', '2 slices brown bread with peanut butter'] },
+      { time: 'Mid-Morning (10 AM)', items: ['Handful of mixed nuts & dry fruits', '1 glass whole milk or protein shake'] },
+      { time: 'Lunch (1–2 PM)', items: ['2 cups rice + dal', 'Chicken breast / Paneer (200g)', 'Salad with olive oil dressing', '1 cup curd'] },
+      { time: 'Evening (4–5 PM)', items: ['Peanut butter & banana smoothie', 'Roasted chana'] },
+      { time: 'Dinner (7–8 PM)', items: ['3 rotis + mixed vegetable sabzi', 'Dal makhani or rajma', '1 glass warm milk'] },
+    ],
+    tips: ['Eat every 3–4 hours', 'Strength training 4x/week', 'Sleep 7–8 hrs daily', 'Avoid junk calories']
+  },
+  normal: {
+    label: 'Normal Weight', color: '#22c55e',
+    goal: 'Maintain healthy weight & stay fit',
+    calories: '2000 – 2400 kcal/day',
+    meals: [
+      { time: 'Breakfast (7–8 AM)', items: ['Vegetable poha or upma', '2 boiled eggs or sprouts', '1 cup green tea'] },
+      { time: 'Mid-Morning (10 AM)', items: ['1 seasonal fruit (apple/guava/papaya)', 'Handful of almonds'] },
+      { time: 'Lunch (1–2 PM)', items: ['1–2 cups rice or 2 rotis', 'Dal + sabzi', 'Grilled chicken or tofu (150g)', 'Salad & buttermilk'] },
+      { time: 'Evening (4–5 PM)', items: ['1 cup green tea', 'Roasted makhana or chana'] },
+      { time: 'Dinner (7–8 PM)', items: ['2 rotis + dal / sabzi', 'Soup or light chicken curry', '15 min walk after dinner'] },
+    ],
+    tips: ['Drink 3L water daily', 'Exercise 4–5x/week', 'Limit sugar & processed food', 'Track meals weekly']
+  },
+  overweight: {
+    label: 'Overweight', color: '#f97316',
+    goal: 'Lose excess fat & improve fitness',
+    calories: '1500 – 1800 kcal/day',
+    meals: [
+      { time: 'Breakfast (7–8 AM)', items: ['Vegetable omelette (2 eggs)', 'Multigrain toast (1 slice)', '1 cup green tea (no sugar)'] },
+      { time: 'Mid-Morning (10 AM)', items: ['1 fruit (apple/pear/guava)', '5–6 almonds or walnuts'] },
+      { time: 'Lunch (1–2 PM)', items: ['2 rotis (wheat) + dal', 'Grilled chicken / fish / paneer (100g)', 'Large salad', 'Avoid rice & maida'] },
+      { time: 'Evening (4–5 PM)', items: ['Green tea or black coffee', 'Roasted chana (small bowl)'] },
+      { time: 'Dinner (7–8 PM)', items: ['1–2 rotis + light sabzi / soup', 'Avoid carbs after 7 PM', 'Dinner before 8 PM'] },
+    ],
+    tips: ['Cardio 5x/week (30–45 min)', 'Drink water before meals', 'Avoid sugar, fried food, soda', 'Eat dinner early']
+  },
+  obese: {
+    label: 'Obese', color: '#ef4444',
+    goal: 'Significant fat loss under guidance',
+    calories: '1200 – 1500 kcal/day',
+    meals: [
+      { time: 'Breakfast (7–8 AM)', items: ['2 egg whites scrambled', '1 slice multigrain bread', '1 cup green tea (no sugar)'] },
+      { time: 'Mid-Morning (10 AM)', items: ['1 small fruit (apple/pear)', 'Warm lemon water'] },
+      { time: 'Lunch (1–2 PM)', items: ['1 roti + bowl of dal', 'Grilled chicken or fish (100g)', 'Steamed vegetables', 'NO rice, maida or fried items'] },
+      { time: 'Evening (4–5 PM)', items: ['Herbal / green tea', 'Cucumber or carrot sticks'] },
+      { time: 'Dinner (7–8 PM)', items: ['Vegetable soup (no cream)', '1 roti + stir-fried vegetables', 'Dinner before 7:30 PM strictly'] },
+    ],
+    tips: ['Consult a doctor before dieting', 'Start with walking 20 min/day', 'Zero alcohol & sugary drinks', 'Weigh yourself weekly']
+  }
+};
+
+function getBMICategory(bmi) {
+  if (bmi < 18.5) return 'underweight';
+  if (bmi < 25) return 'normal';
+  if (bmi < 30) return 'overweight';
+  return 'obese';
+}
+
+function calculateBMI() {
+  const name = document.getElementById('bmiName').value.trim();
+  const height = parseFloat(document.getElementById('bmiHeight').value);
+  const weight = parseFloat(document.getElementById('bmiWeight').value);
+  if (!name || !height || !weight) { alert('Please fill all fields!'); return; }
+
+  const hm = height / 100;
+  const bmi = (weight / (hm * hm)).toFixed(1);
+  const cat = getBMICategory(parseFloat(bmi));
+  const plan = dietPlans[cat];
+
+  // Score
+  document.getElementById('bmiNum').textContent = bmi;
+  document.getElementById('bmiNum').style.color = plan.color;
+  document.getElementById('bmiCat').textContent = plan.label;
+  document.getElementById('bmiCat').style.background = plan.color;
+
+  // Gauge
+  const pct = ((Math.min(Math.max(parseFloat(bmi), 10), 40) - 10) / 30) * 100;
+  document.getElementById('gaugeNeedle').style.left = pct + '%';
+
+  // Diet chart meta
+  document.getElementById('dcMeta').innerHTML = `<strong>Name:</strong> ${name}<br/><strong>BMI:</strong> ${bmi}<br/><strong>Category:</strong> <span style="color:${plan.color}">${plan.label}</span><br/><strong>Daily Target:</strong> ${plan.calories}`;
+  document.getElementById('dcGoal').textContent = 'Goal: ' + plan.goal;
+
+  // Meals
+  let mealsHtml = '';
+  plan.meals.forEach(m => {
+    mealsHtml += `<div class="dc-meal-row"><div class="dc-meal-time" style="border-right-color:${plan.color}">${m.time}</div><div class="dc-meal-items">${m.items.map(i => `<span>✓ ${i}</span>`).join('')}</div></div>`;
+  });
+  document.getElementById('dcMeals').innerHTML = mealsHtml;
+
+  // Tips
+  document.getElementById('dcTips').innerHTML = `<div class="dc-tips"><h4 style="color:${plan.color}">Key Tips</h4><div class="dc-tips-grid">${plan.tips.map(t => `<div class="dc-tip">${t}</div>`).join('')}</div></div>`;
+
+  document.getElementById('bmiResult').style.display = 'block';
+  document.getElementById('bmiResult').scrollIntoView({ behavior: 'smooth' });
+}
+
+async function downloadChart() {
+  const { default: html2canvas } = await import('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.esm.js');
+  const { jsPDF } = await import('https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.esm.js');
+  const name = document.getElementById('bmiName').value.trim() || 'Member';
+  const chart = document.getElementById('dietChart');
+  const canvas = await html2canvas(chart, { scale: 2, backgroundColor: '#ffffff', useCORS: true });
+  const pdf = new jsPDF({ unit: 'px', format: [canvas.width / 2, canvas.height / 2] });
+  pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width / 2, canvas.height / 2);
+  pdf.save(`${name.replace(/\s+/g,'_')}_Diet_Chart.pdf`);
+}
+
+// WhatsApp form
+function sendWA(e) {
+  e.preventDefault();
+  const name = document.getElementById('cfName').value;
+  const phone = document.getElementById('cfPhone').value;
+  const email = document.getElementById('cfEmail').value;
+  const plan = document.getElementById('cfPlan').value;
+  const msg = document.getElementById('cfMsg').value;
+  const text = encodeURIComponent(`🏋️ *New Enquiry - The Fitness Lane*\n\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}${email ? `\n📧 *Email:* ${email}` : ''}${plan ? `\n💪 *Interested In:* ${plan}` : ''}${msg ? `\n💬 *Message:* ${msg}` : ''}`);
+  window.open(`https://wa.me/91XXXXXXXXXX?text=${text}`, '_blank');
+}
+
+  </script>
+</body>
+</html>
