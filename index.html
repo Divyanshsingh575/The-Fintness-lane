@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Fitness Lane — Indore</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <title>AB Fitness Club — Multai</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -107,13 +108,42 @@ img { max-width: 100%; display: block; }
 .navbar.scrolled { box-shadow: var(--shadow); }
 .nav-inner { display: flex; align-items: center; gap: 2rem; padding: 1rem 1.5rem; }
 .nav-logo {
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
-  letter-spacing: 3px;
-  color: var(--black);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
   flex-shrink: 0;
 }
-.nav-logo strong { color: var(--primary); }
+.nav-logo i {
+  font-size: 1.65rem;
+  color: var(--primary);
+  background: rgba(230,49,24,0.08);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.logo-brand {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  letter-spacing: 2.5px;
+  color: var(--black);
+}
+.logo-brand strong {
+  color: var(--primary);
+}
+.logo-location {
+  font-size: 0.58rem;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--gray);
+  font-weight: 500;
+}
 .nav-links { display: flex; gap: 1.8rem; flex: 1; }
 .nav-links a {
   font-size: 0.78rem;
@@ -456,8 +486,32 @@ img { max-width: 100%; display: block; }
 /* ── FOOTER ── */
 .footer { background: var(--black); color: rgba(255,255,255,0.7); padding: 4rem 0 0; }
 .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 3rem; padding-bottom: 3rem; }
-.footer-logo { font-family: var(--font-heading); font-size: 1.4rem; letter-spacing: 3px; color: #fff; margin-bottom: 1rem; }
-.footer-logo strong { color: var(--primary); }
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.footer-logo i {
+  font-size: 1.6rem;
+  color: var(--primary);
+  background: rgba(230,49,24,0.15);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-logo .logo-brand {
+  color: #fff;
+  font-size: 1.4rem;
+}
+.footer-logo .logo-brand strong {
+  color: var(--primary);
+}
+.footer-logo .logo-location {
+  color: rgba(255,255,255,0.4);
+}
 .footer-brand p { font-size: 0.82rem; line-height: 1.8; color: rgba(255,255,255,0.45); max-width: 260px; }
 .footer-col h4 { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(230,49,24,0.3); }
 .footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -554,7 +608,11 @@ img { max-width: 100%; display: block; }
   <nav class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="#home" class="nav-logo">
-        THE <strong>FITNESS</strong> LANE
+        <i class="fas fa-dumbbell"></i>
+        <div class="logo-text">
+          <span class="logo-brand">AB <strong>FITNESS</strong></span>
+          <span class="logo-location">Multai, M.P.</span>
+        </div>
       </a>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
@@ -587,12 +645,12 @@ img { max-width: 100%; display: block; }
     <div class="hero-bg"></div>
     <div class="container hero-inner">
       <div class="hero-content" data-aos>
-        <span class="hero-tag"><i class="fas fa-fire"></i> Indore's Premium Gym</span>
+        <span class="hero-tag"><i class="fas fa-fire"></i> Multai's Premium Gym</span>
         <h1>TRAIN HARD.<br /><span>LIVE STRONG.</span></h1>
         <p>Where champions are built. World-class equipment, expert trainers and a community that pushes you beyond limits.</p>
         <div class="hero-info">
-          <span><i class="fas fa-clock"></i> Mon–Sat: 5 AM – 11 PM</span>
-          <span><i class="fas fa-map-marker-alt"></i> Indore, M.P.</span>
+          <span><i class="fas fa-clock"></i> Mon–Sat: 6 AM – 11 PM</span>
+          <span><i class="fas fa-map-marker-alt"></i> Multai, M.P.</span>
         </div>
         <div class="hero-btns">
           <a href="#contact" class="btn-primary">Start Free Trial</a>
@@ -621,7 +679,7 @@ img { max-width: 100%; display: block; }
       <div class="section-header">
         <span class="section-tag">Who We Are</span>
         <h2>MORE THAN A <span>GYM</span>, A LIFESTYLE</h2>
-        <p>Founded in Indore, The Fitness Lane was born from a simple belief — that every person deserves access to world-class fitness.</p>
+        <p>Founded in Multai, AB Fitness Club was born from a simple belief — that every person deserves access to world-class fitness.</p>
       </div>
       <div class="about-grid">
         <div class="about-img-col" data-aos>
@@ -762,7 +820,7 @@ img { max-width: 100%; display: block; }
           <div class="plan-name">Basic</div>
           <div class="plan-price">₹999<span>/month</span></div>
           <ul class="plan-features">
-            <li class="yes"><i class="fas fa-check"></i> Gym Access (6 AM–10 PM)</li>
+            <li class="yes"><i class="fas fa-check"></i> Gym Access (6 AM–11 PM)</li>
             <li class="yes"><i class="fas fa-check"></i> Locker Room</li>
             <li class="yes"><i class="fas fa-check"></i> Free Weight Zone</li>
             <li class="yes"><i class="fas fa-check"></i> Cardio Equipment</li>
@@ -776,7 +834,7 @@ img { max-width: 100%; display: block; }
           <div class="plan-name">Premium</div>
           <div class="plan-price">₹1,799<span>/month</span></div>
           <ul class="plan-features">
-            <li class="yes"><i class="fas fa-check"></i> Gym Access (5 AM–11 PM)</li>
+            <li class="yes"><i class="fas fa-check"></i> Gym Access (6 AM–11 PM)</li>
             <li class="yes"><i class="fas fa-check"></i> Locker Room</li>
             <li class="yes"><i class="fas fa-check"></i> Free Weight Zone</li>
             <li class="yes"><i class="fas fa-check"></i> Cardio Equipment</li>
@@ -883,7 +941,7 @@ img { max-width: 100%; display: block; }
         <div class="diet-chart" id="dietChart">
           <div class="dc-header">
             <div>
-              <div class="dc-gym">THE FITNESS LANE · INDORE</div>
+              <div class="dc-gym">AB FITNESS CLUB · MULTAI</div>
               <div class="dc-title">PERSONALISED DIET CHART</div>
             </div>
             <div class="dc-meta" id="dcMeta"></div>
@@ -892,7 +950,7 @@ img { max-width: 100%; display: block; }
           <div id="dcMeals"></div>
           <div class="dc-tips" id="dcTips"></div>
           <div class="dc-contact">
-            📍 Indore, M.P. &nbsp;|&nbsp; 📞 +91 XXXXX XXXXX &nbsp;|&nbsp; ✉ thefitnesslan e@gmail.com
+            📍 Multai, M.P. &nbsp;|&nbsp; 📞 +91 XXXXX XXXXX &nbsp;|&nbsp; ✉ abfitness@gmail.com
           </div>
           <div class="dc-footer">This is a general guideline. Consult a certified nutritionist for a personalised plan.</div>
         </div>
@@ -910,10 +968,10 @@ img { max-width: 100%; display: block; }
       </div>
       <div class="contact-grid">
         <div class="contact-info">
-          <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong>Address</strong><p>Indore, Madhya Pradesh</p></div></div>
+          <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong>Address</strong><p>Multai, Madhya Pradesh</p></div></div>
           <div class="info-item"><i class="fas fa-phone"></i><div><strong>Phone</strong><p>+91 XXXXX XXXXX</p></div></div>
           <div class="info-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><p>thefitnesslan e@gmail.com</p></div></div>
-          <div class="info-item"><i class="fas fa-clock"></i><div><strong>Hours</strong><p>Mon–Sat: 5 AM – 11 PM<br/>Sun: 8 AM – 1 PM</p></div></div>
+          <div class="info-item"><i class="fas fa-clock"></i><div><strong>Hours</strong><p>Mon–Sat: 6 AM – 11 PM<br/>Sun: 8 AM – 1 PM</p></div></div>
           <div class="contact-socials">
             <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
@@ -949,8 +1007,14 @@ img { max-width: 100%; display: block; }
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <div class="footer-logo">THE <strong>FITNESS</strong> LANE</div>
-        <p>Indore's premium fitness destination. Your journey to a stronger, healthier you starts here.</p>
+        <div class="footer-logo">
+          <i class="fas fa-dumbbell"></i>
+          <div class="logo-text">
+            <span class="logo-brand">AB <strong>FITNESS</strong></span>
+            <span class="logo-location">Multai, M.P.</span>
+          </div>
+        </div>
+        <p>Multai's premium fitness destination. Your journey to a stronger, healthier you starts here.</p>
       </div>
       <div class="footer-col">
         <h4>Quick Links</h4>
@@ -977,15 +1041,15 @@ img { max-width: 100%; display: block; }
       <div class="footer-col">
         <h4>Contact</h4>
         <ul class="footer-contact">
-          <li><i class="fas fa-map-marker-alt"></i> Indore, Madhya Pradesh</li>
+          <li><i class="fas fa-map-marker-alt"></i> Multai, Madhya Pradesh</li>
           <li><i class="fas fa-phone"></i> +91 XXXXX XXXXX</li>
           <li><i class="fas fa-envelope"></i> thefitnesslan e@gmail.com</li>
-          <li><i class="fas fa-clock"></i> Mon–Sat: 5 AM – 11 PM</li>
+          <li><i class="fas fa-clock"></i> Mon–Sat: 6 AM – 11 PM</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 The Fitness Lane, Indore. All Rights Reserved.</p>
+      <p>© 2025 AB Fitness Club, Multai. All Rights Reserved.</p>
     </div>
   </footer>
 
@@ -1159,7 +1223,7 @@ function sendWA(e) {
   const email = document.getElementById('cfEmail').value;
   const plan = document.getElementById('cfPlan').value;
   const msg = document.getElementById('cfMsg').value;
-  const text = encodeURIComponent(`🏋️ *New Enquiry - The Fitness Lane*\n\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}${email ? `\n📧 *Email:* ${email}` : ''}${plan ? `\n💪 *Interested In:* ${plan}` : ''}${msg ? `\n💬 *Message:* ${msg}` : ''}`);
+  const text = encodeURIComponent(`🏋️ *New Enquiry - AB Fitness Club*\n\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}${email ? `\n📧 *Email:* ${email}` : ''}${plan ? `\n💪 *Interested In:* ${plan}` : ''}${msg ? `\n💬 *Message:* ${msg}` : ''}`);
   window.open(`https://wa.me/91XXXXXXXXXX?text=${text}`, '_blank');
 }
 

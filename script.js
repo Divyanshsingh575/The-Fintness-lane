@@ -162,6 +162,6 @@ function sendWA(e) {
   const email = document.getElementById('cfEmail').value;
   const plan = document.getElementById('cfPlan').value;
   const msg = document.getElementById('cfMsg').value;
-  const text = encodeURIComponent(`🏋️ *New Enquiry - The Fitness Lane*\n\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}${email ? `\n📧 *Email:* ${email}` : ''}${plan ? `\n💪 *Interested In:* ${plan}` : ''}${msg ? `\n💬 *Message:* ${msg}` : ''}`);
+  const text = encodeURIComponent(`🏋️ *New Enquiry - AB Fitness Club*\n\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}${email ? `\n📧 *Email:* ${email}` : ''}${plan ? `\n💪 *Interested In:* ${plan}` : ''}${msg ? `\n💬 *Message:* ${msg}` : ''}`);
   window.open(`https://wa.me/91XXXXXXXXXX?text=${text}`, '_blank');
 }
